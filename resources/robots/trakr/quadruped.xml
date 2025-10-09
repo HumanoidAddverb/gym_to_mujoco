@@ -1,0 +1,157 @@
+<mujoco model="Quadruped">
+  <compiler angle="radian" autolimits="true" meshdir="meshes/" eulerseq="zyx"/>
+  <!-- <option timestep='0.005' iterations='50' solver='PGS' gravity='0 0 -9.81'> -->
+    <!-- <flag sensornoise="disable" frictionloss="disable"  clampctrl="disable"  /> -->
+    <!-- </option> -->
+  <!-- <statistic meansize="0.1482" extent="0.842637" center="4.38203e-05 -0.020216 -0.0247945"/> -->
+    <!-- <option gravity="0 0 -1" /> -->
+    <size njmax="500" nconmax="100" />
+    <asset>
+        <mesh name="base_link" file="base_link.stl" />
+        <mesh name="LF_hip" file="LF_hip.STL" />        
+        <mesh name="LF_thigh" file="LF_thigh.STL" />
+        <mesh name="LF_shank" file="LF_shank.STL" />
+        <mesh name="LF_toe" file="LF_toe.STL" />
+        <mesh name="RF_hip" file="RF_hip.STL" />
+        <mesh name="RF_thigh" file="RF_thigh.STL" />
+        <mesh name="RF_shank" file="RF_shank.STL" />
+        <mesh name="RF_toe" file="RF_toe.STL" />
+        <mesh name="LB_hip" file="LB_hip.STL" />
+        <mesh name="LB_thigh" file="LB_thigh.STL" />
+        <mesh name="LB_shank" file="LB_shank.STL" />
+        <mesh name="LB_toe" file="LB_toe.STL" />
+        <mesh name="RB_hip" file="RB_hip.STL" />
+        <mesh name="RB_thigh" file="RB_thigh.STL" />
+        <mesh name="RB_shank" file="RB_shank.STL" />
+        <mesh name="RB_toe" file="RB_toe.STL" />
+    </asset>
+
+    <contact>
+        <exclude body1="base_link" body2="LF_hip" />
+        <exclude body1="base_link" body2="LF_thigh" />
+        <exclude body1="base_link" body2="LF_shank" />
+        <exclude body1="base_link" body2="LB_hip" />
+        <exclude body1="base_link" body2="LB_thigh" />
+        <exclude body1="base_link" body2="RB_shank" />
+        <exclude body1="base_link" body2="RB_hip" />
+        <exclude body1="base_link" body2="RB_thigh" />
+        <exclude body1="base_link" body2="RB_shank" />
+        <exclude body1="base_link" body2="RF_hip" />
+        <exclude body1="base_link" body2="RF_thigh" />
+        <exclude body1="base_link" body2="RF_shank" />
+    </contact>
+
+    <worldbody>
+    <geom type="plane" size="5 5 .01" pos="0 0 0" condim="4" friction="0.8 0.02 0.01" />
+    <body name="base_link" pos="0 0 0.25" euler="0 0 0">
+      <joint name = "free" type="free"/>
+      <site name="origin"/>
+      <inertial pos="0.00131 -0.02301 0.04683" mass="7.61978" fullinertia="0.14013911779 0.04832048907 0.15158890706 0.00064415811 0.00317606692 -0.00070801969" />
+
+        <!-- <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.75294 0.75294 0.75294 1" mesh="base_link" /> -->
+        <geom type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="base_link" />
+        
+        <body name="LB_hip" pos="-0.055 -0.159 0.057" quat="-2.59734e-06 -2.59735e-06 0.707108 0.707105">
+            <inertial pos="-0.00431 7e-05 -0.05216" quat="0.999985 -0.00524617 -0.000407294 -0.00170314" mass="0.777" diaginertia="0.000949577 0.000623297 0.000506069" />
+            <joint name="LB_adduction" pos="0 0 0" axis="0 0 1" limited="true" range="-0.785 0.785" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.25098 0.25098 0.25098 1" mesh="LB_hip" />
+            <geom type="mesh" rgba="0.25098 0.25098 0.25098 1" mesh="LB_hip" />
+            <body name="LB_thigh" pos="0.0864 0 -0.0565" quat="0.626496 -0.327874 0.626498 -0.327874">
+                <inertial pos="0.02078 0.00242 -0.02131" quat="0.188891 0.750486 0.170577 0.609913" mass="1.323" diaginertia="0.00480039 0.00451022 0.00125726" />
+                <joint name="LB_hip" pos="0 0 0" axis="0 0 -1" limited="true" range="-0.872 1.3" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.75294 0.75294 0.75294 1" mesh="LB_thigh" />
+                <geom type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="LB_thigh" />
+                <body name="LB_shank" pos="0.2 0 0" quat="0.805516 0 0 -0.592574">
+                    <inertial pos="0.122798 -0.00970661 0.000167519" quat="-0.0298089 0.707127 0.0198208 0.70618" mass="0.22715" diaginertia="0.00145956 0.00144736 3.65971e-05" />
+                    <joint name="LB_knee" pos="0 0 0" axis="0 0 -1" limited="true" range="-0.13 1.4" />
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.75294 0.75294 0.75294 1" mesh="LB_shank" />
+                    <geom type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="LB_shank" />
+                    <geom pos="0.20917 0 0.0001" quat="-2.59734e-06 0.707105 -2.59735e-06 -0.707108" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.29804 0.29804 0.29804 1" mesh="LB_toe" />
+                    <geom pos="0.20917 0 0.0001" quat="-2.59734e-06 0.707105 -2.59735e-06 -0.707108" type="mesh" rgba="0.29804 0.29804 0.29804 1" mesh="LB_toe" condim="4" friction="0.8 0.02 0.01"/>
+                </body>
+            </body>
+        </body>
+        <body name="LF_hip" pos="-0.055 0.159 0.057" quat="-2.59734e-06 -2.59735e-06 0.707108 0.707105">
+            <inertial pos="-0.0041 9.7278e-05 0.05222" euler="0 0 0" mass="0.777" diaginertia="0.000949971 0.000624827 0.000504916" />
+            <joint name="LF_adduction" pos="0 0 0" axis="0 0 1" limited="true" range="-0.785 0.785" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.25098 0.25098 0.25098 1" mesh="LF_hip" />
+            <geom type="mesh" rgba="0.25098 0.25098 0.25098 1" mesh="LF_hip" />
+            <body name="LF_thigh" pos="0.0864 -4.2027e-05 0.056486" quat="0.626506 -0.327855 0.626508 -0.327855">
+                <inertial pos="0.02073 0.00247 -0.02131" quat="0.186959 0.751114 0.16801 0.610449" mass="1.323" diaginertia="0.00479896 0.00451006 0.00125966" />
+                <joint name="LF_hip" pos="0 0 0" axis="0 0 -1" limited="true" range="-0.872 1.3" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.75294 0.75294 0.75294 1" mesh="LF_thigh" />
+                <geom type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="LF_thigh" />
+                <body name="LF_shank" pos="0.19996 0 0" quat="0.805516 0 0 -0.592574">
+                    <inertial pos="0.1228 -0.00970656 6.75175e-05" quat="-0.029809 0.707127 0.0198208 0.70618" mass="0.22713" diaginertia="0.00145956 0.00144735 3.65971e-05" />
+                    <joint name="LF_knee" pos="0 0 0" axis="0 0 -1" limited="true" range="-0.13 1.4" />
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.75294 0.75294 0.75294 1" mesh="LF_shank" />
+                    <geom type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="LF_shank" />
+                    <geom pos="0.20917 0 0" quat="-2.59734e-06 0.707105 -2.59735e-06 -0.707108" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.29804 0.29804 0.29804 1" mesh="LF_toe" />
+                    <geom pos="0.20917 0 0" quat="-2.59734e-06 0.707105 -2.59735e-06 -0.707108" type="mesh" rgba="0.29804 0.29804 0.29804 1" mesh="LF_toe" condim="4" friction="0.8 0.02 0.01" />
+                </body>
+            </body>
+        </body>
+        <body name="RB_hip" pos="0.055 -0.159 0.057" quat="-2.59734e-06 2.59735e-06 -0.707108 0.707105">
+            <inertial pos="0.00431 -6e-05 0.05216" quat="0.99998 -0.00603824 -0.000431253 -0.00173375" mass="0.777" diaginertia="0.000949583 0.000623434 0.000505937" />
+            <joint name="RB_adduction" pos="0 0 0" axis="0 0 -1" limited="true" range="-0.785 0.785" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.25098 0.25098 0.25098 1" mesh="RB_hip" />
+            <geom type="mesh" rgba="0.25098 0.25098 0.25098 1" mesh="RB_hip" />
+            <body name="RB_thigh" pos="-0.086446 -5.0614e-05 0.055852" quat="0.327621 0.626038 0.328126 0.626956">
+                <inertial pos="0.02089 0.00249 0.02273" quat="-0.127625 0.627185 -0.159026 0.751705" mass="1.324" diaginertia="0.0047526 0.00445621 0.00120725" />
+                <joint name="RB_hip" pos="0 0 0" axis="0 0 -1" limited="true" range="-0.872 1.3" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.75294 0.75294 0.75294 1" mesh="RB_thigh" />
+                <geom type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="RB_thigh" />
+                <body name="RB_shank" pos="0.2 0 0" quat="0.805516 0 0 -0.592574">
+                    <inertial pos="0.126239 -0.00685657 -0.000722775" quat="-0.0263831 0.704762 0.041445 0.70774" mass="0.22713" diaginertia="0.00160938 0.00159645 3.73314e-05" />
+                    <joint name="RB_knee" pos="0 0 0" axis="0 0 -1" limited="true" range="-0.13 1.4" />
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.75294 0.75294 0.75294 1" mesh="RB_shank" />
+                    <geom type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="RB_shank" />
+                    <geom pos="0.20885 0.00056478 0" quat="-2.59877e-06 0.706719 -2.59592e-06 -0.707494" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.29804 0.29804 0.29804 1" mesh="RB_toe" />
+                    <geom pos="0.20885 0.00056478 0" quat="-2.59877e-06 0.706719 -2.59592e-06 -0.707494" type="mesh" rgba="0.29804 0.29804 0.29804 1" mesh="RB_toe" condim="4" friction="0.8 0.02 0.01" />
+                </body>
+            </body>
+        </body>
+
+        <body name="RF_hip" pos="0.055 0.159 0.057" quat="-2.59734e-06 2.59735e-06 -0.707108 0.707105">
+            <inertial pos="0.00431 -8.7642e-05 -0.05218" quat="0.999986 0.00482635 0.000801103 -0.00212376" mass="0.777" diaginertia="0.000949719 0.000624031 0.00050547" />
+            <joint name="RF_adduction" pos="0 0 0" axis="0 0 -1" limited="true" range="-0.785 0.785" />
+            <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.25098 0.25098 0.25098 1" mesh="RF_hip" />
+            <geom type="mesh" rgba="0.25098 0.25098 0.25098 1" mesh="RF_hip" />
+            <body name="RF_thigh" pos="-0.085459 0 -0.057131" quat="0.327602 0.626048 0.328108 0.626966">
+                <inertial pos="0.02085 0.0025 0.02273" quat="-0.127768 0.627157 -0.159168 0.751675" mass="1.324" diaginertia="0.0047527 0.00445627 0.00120712" />
+                <joint name="RF_hip" pos="0 0 0" axis="0 0 -1" limited="true" range="-0.872 1.3" />
+                <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.75294 0.75294 0.75294 1" mesh="RF_thigh" />
+                <geom type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="RF_thigh" />
+                <body name="RF_shank" pos="0.19996 0 0" quat="0.805516 0 0 -0.592574">
+                    <inertial pos="0.126239 -0.00685692 -0.000896862" quat="-0.0214532 0.70528 0.0463785 0.707085" mass="0.22713" diaginertia="0.00160937 0.00159642 3.73292e-05" />
+                    <joint name="RF_knee" pos="0 0 0" axis="0 0 -1" limited="true" range="-0.13 1.4" />
+                    <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.75294 0.75294 0.75294 1" mesh="RF_shank" />
+                    <geom type="mesh" rgba="0.75294 0.75294 0.75294 1" mesh="RF_shank" />
+                    <geom pos="0.20885 0.00056281 -0.00098851" quat="-2.59877e-06 0.706719 -2.59592e-06 -0.707494" type="mesh" contype="0" conaffinity="0" group="1" rgba="0.29804 0.29804 0.29804 1" mesh="RF_toe" />
+                    <geom pos="0.20885 0.00056281 -0.00098851" quat="-2.59877e-06 0.706719 -2.59592e-06 -0.707494" type="mesh" rgba="0.29804 0.29804 0.29804 1" mesh="RF_toe" condim="4" friction="0.8 0.02 0.01"/>
+                </body>
+            </body>
+        </body>
+        
+                </body>
+
+    </worldbody>
+
+    <!-- TORQUE MODE ACTUATOS  -->
+    <actuator>
+
+        <motor name="leg1mot1_act" joint="LB_adduction"/>  
+        <motor name="leg1mot2_act" joint="LB_hip" />
+        <motor name="leg1mot3_act" joint="LB_knee"/>
+        <motor name="leg2mot1_act" joint="LF_adduction"/>
+        <motor name="leg2mot2_act" joint="LF_hip"/>
+        <motor name="leg2mot3_act" joint="LF_knee"/>
+        <motor name="leg3mot1_act" joint="RB_adduction"/>
+        <motor name="leg3mot2_act" joint="RB_hip"/>
+        <motor name="leg3mot3_act" joint="RB_knee"/>
+        <motor name="leg4mot1_act" joint="RF_adduction"/>
+        <motor name="leg4mot2_act" joint="RF_hip"/>
+        <motor name="leg4mot3_act" joint="RF_knee"/>
+
+    </actuator>
+</mujoco>
