@@ -8,8 +8,12 @@
 <p align="center">
   <strong>This is a repository to infer reinforcement learning policies on Mujoco simulator.</strong> 
 </p>
+<div align="center">
+<video autoplay muted loop playsinline width="480px">
+  <source src="trakr.mp4" type="video/mp4">
+</video>
 
----
+</div>
 
 ## 📦 Installation and Configuration
 
